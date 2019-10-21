@@ -1,10 +1,17 @@
 package com.escapegame.game;
 
+import com.escapegame.configuration.Sentences;
 import com.escapegame.tools.Captures;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
+import java.util.Properties;
 
 import static com.escapegame.configuration.Memory.*;
 
 public abstract class Mod {
+    private static final Logger logger = LogManager.getLogger(Mod.class);
     public static int selected;
 
     /**
@@ -12,10 +19,15 @@ public abstract class Mod {
      * Allows the player to select the desired game mode
      */
     public static void menu() {
-        System.out.println(menu);
-
-        selected = Captures.readInt(1, 3);
-        started(selected);
+        Properties prop = null;
+        try {
+            prop = Sentences.load();
+            System.out.println(prop.getProperty("Menu", "vide"));
+            selected = Captures.readInt(1, 3);
+            started(selected);
+        } catch (IOException e) {
+            logger.debug(e);
+        }
     }
 
     /**
@@ -74,20 +86,29 @@ public abstract class Mod {
      * @param end true if the player won, false if the player lost
      */
     public void end(boolean end){
-        if (end)
-            System.out.println(winEnd);
-        else
-            System.out.println(loseEnd);
-        System.out.println("");
-        System.out.println(theEnd.get(0));
-        System.out.println("");
-        System.out.println(theEnd.get(1) + getNameMod() + " \n"
-                + theEnd.get(2) + " \n"
-                + theEnd.get(3) + " \n");
+        Properties prop = null;
+        try {
+            prop = Sentences.load();
+            System.out.println(prop.getProperty("Menu"));
+            selected = Captures.readInt(1, 3);
+            started(selected);
 
-        int select = Captures.readInt(1, 4);
+            if (end)
+                System.out.println(prop.getProperty("Win"));
+            else
+                System.out.println(prop.getProperty("Lose"));
+            System.out.println("");
+            System.out.println(prop.getProperty("End"));
+            System.out.println("");
+            System.out.println(prop.getProperty("EndOne") + getNameMod() + " \n"
+                    + prop.getProperty("EndTwo"));
 
-        Mod.choice(select);
+            int select = Captures.readInt(1, 4);
+
+            Mod.choice(select);
+        } catch (IOException e) {
+            logger.debug(e);
+        }
     }
 
     public abstract String getNameMod();

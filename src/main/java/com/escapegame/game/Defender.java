@@ -1,55 +1,83 @@
 package com.escapegame.game;
 
+import com.escapegame.configuration.Sentences;
 import com.escapegame.tools.Captures;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
+import java.util.Properties;
 
 import static com.escapegame.game.IA.iaNumber;
 import static com.escapegame.configuration.Memory.*;
 
 public class Defender extends Mod {
-    public Defender(){
+    private static final Logger logger = LogManager.getLogger(Defender.class);
+
+    public Defender() {
         super();
         getDisplay();
     }
 
     @Override
     public void getDisplay() {
-        System.out.println(start.get(0)  + " " + getNameMod() + "!\n"
-                + start.get(1) + "!\n"
-                + start.get(5) + " " + secret + display2
-                + start.get(6) + " " + totalTurn + display3
-                + start.get(4));
+        Properties prop = null;
+        try {
+            prop = Sentences.load();
+            System.out.println(prop.getProperty("Start") + " " + getNameMod() + "!\n"
+                    + prop.getProperty("StartOne") + "\n"
+                    + prop.getProperty("StartSix") + " " + secret + prop.getProperty("StartSeven")
+                    + prop.getProperty("StartEight") + " " + totalTurn + prop.getProperty("StartNine")
+                    + prop.getProperty("StartFive"));
 
-        getTurn();
+            getTurn();
+        } catch (IOException e) {
+            logger.debug(e);
+        }
     }
 
     @Override
     public void getTurn() {
         IA ia = new IA();
+        Properties prop = null;
 
-        System.out.println(secret1.get(2));
-        numberJ = Captures.readInt(minP,maxP);
-        for (numberTurn = 1; numberTurn <= totalTurn; numberTurn++) {
-            if (numberTurn == 1) {
-                ia.first();
-                System.out.println("Propostion de l'ordinateur : " + iaNumber);
-                Captures.readString();
-            } else {
-                ia.beug();
-                System.out.println(secret1.get(3) + numberJ + "\n Propostion de l'ordinateur : " + iaNumber );
-                Captures.readString();
+        try {
+            prop = Sentences.load();
+
+            System.out.println(prop.getProperty("SecretTwo"));
+            numberJ = Captures.readInt(minP, maxP);
+            for (numberTurn = 1; numberTurn <= totalTurn; numberTurn++) {
+                if (numberTurn == 1) {
+                    ia.first();
+                    System.out.println(prop.getProperty("PropositionOne") + iaNumber);
+                    Captures.readString();
+                } else {
+                    ia.beug();
+                    System.out.println(prop.getProperty("SecretTwo") + numberJ + "\n" + prop.getProperty("PropositionOne") + iaNumber);
+                    Captures.readString();
+                }
+
+                if (numberTurn == 5)
+                    end(true);
+
+                if (total.equals(win))
+                    end(false);
+
             }
-
-            if (numberTurn == 5)
-                end(true);
-
-            if (total.equals(win))
-                end(false);
-
+        } catch (IOException e) {
+            logger.debug(e);
         }
     }
 
     @Override
     public String getNameMod() {
-        return defender;
+        Properties prop = null;
+        try {
+            prop = Sentences.load();
+        } catch (IOException e) {
+            logger.debug(e);
+        }
+
+        return prop.getProperty("Defender");
     }
 }

@@ -95,8 +95,6 @@ public abstract class Settings {
 
             maxP = Integer.parseInt(tmp2);
             minP = Integer.parseInt(tmp);
-
-            Sentences.read(lang);
             //System.out.println(develop + "\n" + totalTurn + "\n" + secret + "\n" + maximum + "\n" + minimum + "\n" + maxP + "\n" + minP);
         } catch (Exception e) {
             logger.debug(e.toString());
@@ -166,16 +164,12 @@ public abstract class Settings {
 
         } catch (ParserConfigurationException e) {
             logger.debug(e);
-            e.printStackTrace();
         } catch (IOException e) {
             logger.debug(e);
-            e.printStackTrace();
         } catch (XPathExpressionException e) {
             logger.debug(e);
-            e.printStackTrace();
         } catch (org.xml.sax.SAXException e) {
             logger.debug(e);
-            e.printStackTrace();
         }
     }
 }

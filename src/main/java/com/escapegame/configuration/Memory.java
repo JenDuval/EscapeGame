@@ -32,23 +32,5 @@ public abstract class Memory {
    public static String egale = "=";
    public static String code = "";
 
-   public static String lang;
-
-   public static String menu = "";
-   public static String display1 = "";
-   public static String display2 = "";
-   public static String display3 = "";
-   public static String display4 = "";
-   public static String winEnd;
-   public static String loseEnd;
-   public static String equals;
-   public static String turn;
-   public static String versus;
-   public static String defender;
-
-   public static ArrayList<String> theEnd = new ArrayList<String>();
-   public static ArrayList<String> start = new ArrayList<String>();
-   public static ArrayList<String> secret1 = new ArrayList<String>();
-   public static ArrayList<String> other = new ArrayList<String>();
-
+   static String lang;
 }
