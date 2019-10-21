@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- Activé ou desactivé le mode developpeur true : activé, false : désactivé -->
+    <parametre label="develop">
+        <valeur>false</valeur>
+    </parametre>
+    <!-- Modifier le nombre de tour dans une mache dans les mode de jeu.
+    (Le mode duel c'est la valeur entré ici x2) -->
+    <parametre label="totalTurn">
+        <valeur>5</valeur>
+    </parametre>
+    <!-- Modifier le nombre de chiffre dans le code secret -->
+    <parametre label="secret">
+        <valeur>4</valeur>
+    </parametre>
+    <!-- Modifier la valeur maximum dans le random de l'ia
+    (La valeur entré est exlus des valeurs, ici c'est 10 le random affichiera 9 mais jamais 10) -->
+    <parametre label="maximum">
+        <valeur>10</valeur>
+    </parametre>
+    <!-- Modifier la valeur minimmum dans le random de l'ia -->
+    <parametre label="minimum">
+        <valeur>1</valeur>
+    </parametre>
+    <!-- Modifier la valeur maximum que le joueur peut entré. -->
+    <parametre label="maxj">
+        <valeur>9</valeur>
+    </parametre>
+    <!-- Modifier la valeur minimum que le joueur peut entré. -->
+    <parametre label="minj">
+        <valeur>1</valeur>
+    </parametre>
+    <!-- Modifier la valeur language. langage supporter fr et en -->
+    <parametre label="lang">
+        <valeur>fr</valeur>
+    </parametre>
+</config>

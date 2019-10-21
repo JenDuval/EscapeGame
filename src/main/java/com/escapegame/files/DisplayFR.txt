@@ -1,0 +1,51 @@
+Menu = Bienvenue dans l'Escape Game.
+Menu = Menu du jeu.
+Menu = Jouer un autre mode de jeu.
+Menu = Veuillez choisir votre mode de jeu :
+Menu = 1 : Challenger
+Menu = 2 : Défenseur
+Menu = 3 : Duel
+ = ==============================================
+Win = Vous avez gagné !
+Lose = Vous avez perdu !
+Equals = Ni vous, ni l'ordinateur n'a gagné. Vous avez perdu !!!!! Mouhahaha
+ = ==============================================
+End = "Que voulez-vous faire ?"
+End 1 = 1 : Rejouer en mode
+End 2 = 2 : Jouer un autre mode de jeu
+End 2 = 3 : Quitter le jeu
+ = ==============================================
+Start = Vous êtes actuellement dans le mode de jeu
+Start 1 = Vous êtes contre l'ordinateur.
+Start 2 = Vous avez
+Start 3 =  tours pour résoudre l'énigme.
+Start 4 = Vous devez trouver le code secret généré par l'ordinateur.
+Start 4 = Il vous indiquera nombre par nombre si vous avez bon ou pas.
+Start 4 = Il vous indiquera si le chiffre de sa combinaison est plus grand '+', plus petit '-' ou si c’est le bon '='.
+Start 5 = Bon jeu à vous !
+Start 6 = Vous devez choisir un code secret à
+Start 7 =  nombres.
+Start 7 = L'ordinateur doit résoudre l'énigme.
+Start 8 = L'ordinateur à
+Start 9 =  tours pour trouver votre code secret.
+Start 9 = Vous devez indiquer à l'ordinateur nombre par nombre s'il a bon ou pas.
+Start 9 = Vous devez indiquer à l'ordinateur si le chiffre de votre combinaison est plus grand '+', plus petit '-' ou si c’est le bon '='.
+Start 10 = Vous est l'ordinateur définissez chacun votre code secret.
+Start 10 = Tour à tour vous devez essayer de trouver le code secret de l'autre.
+Start 10 = Il vous indiquer nombre par nombre si vous avez bon ou pas.
+Start 10 = Vous devez indiquer à l'ordinateur nombre par nombre s'il a bon ou pas.
+Start 10 = Indication :
+Start 10 = si le chiffre vos combinaisons est plus grand '+', plus petit '-' ou si c’est le bon '='.
+ = ==============================================
+Secret = Combinaison secrète :
+Secret 1 = La combinaison secrète été :
+Secret 2 = Entrez votre code secret :
+Secret 3 = Votre combinaison secrète :
+Secret 4 = Combinaison secrète de l'ordinateur :
+ = ==============================================
+Proposition = Proposition :
+Proposition 1 = Proposition de l'ordinateur :
+Response =  -> Réponse :
+Versus = duel
+Defender = défenseur
+Turn = Tour

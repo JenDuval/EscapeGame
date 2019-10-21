@@ -1,0 +1,8 @@
+develop : false
+totalTurn : 5
+secret : 4
+maximum : 10
+minimum : 1
+maxP : 9
+minP : 1
+lang : fr
