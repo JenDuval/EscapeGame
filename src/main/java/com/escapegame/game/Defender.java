@@ -21,25 +21,24 @@ public class Defender extends Mod {
     }
 
     @Override
-    public String getDisplay() {
+    public void getDisplay() {
         Properties prop = null;
         try {
             prop = Sentences.load();
             Display.write(prop.getProperty("Start") + " " + getNameMod() + "!\n"
                     + prop.getProperty("StartOne") + "\n"
-                    + prop.getProperty("StartSix") + " " + secret + prop.getProperty("StartSeven")
-                    + prop.getProperty("StartEight") + " " + totalTurn + prop.getProperty("StartNine")
+                    + prop.getProperty("StartSix") + " " + secret + " " + prop.getProperty("StartSeven") + "\n"
+                    + prop.getProperty("StartEight") + " " + totalTurn + " " + prop.getProperty("StartNine") + "\n"
                     + prop.getProperty("StartFive"));
 
-            return getTurn();
+            getTurn();
         } catch (IOException e) {
             logger.debug(e);
         }
-        return null;
     }
 
     @Override
-    public String getTurn() {
+    public void getTurn() {
         IA ia = new IA();
         Properties prop = null;
 
@@ -60,16 +59,15 @@ public class Defender extends Mod {
                 }
 
                 if (numberTurn == 5)
-                    return end(true);
+                    end(true);
 
                 if (total.equals(win))
-                    return end(false);
+                    end(false);
 
             }
         } catch (IOException e) {
             logger.debug(e);
         }
-        return null;
     }
 
     @Override

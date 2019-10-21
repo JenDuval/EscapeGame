@@ -73,7 +73,7 @@ public abstract class Mod {
      * Display of start of game sentences
      * @return
      */
-    public abstract String getDisplay();
+    public abstract void getDisplay();
 
     /**
      * A for loop that determines the turns of play
@@ -82,7 +82,7 @@ public abstract class Mod {
      * If the player found before the nbTour rounds call endGame in true
      * @return
      */
-    public abstract String getTurn();
+    public abstract void getTurn();
 
 
     /**
@@ -95,9 +95,6 @@ public abstract class Mod {
         Properties prop = null;
         try {
             prop = Sentences.load();
-            Display.write(prop.getProperty("Menu"));
-            selected = Captures.readInt(1, 3);
-            started(selected);
 
             if (end)
                 Display.write(prop.getProperty("Win"));

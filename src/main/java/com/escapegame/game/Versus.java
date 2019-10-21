@@ -24,25 +24,24 @@ public class Versus extends Mod {
     }
 
     @Override
-    public String getDisplay() {
+    public void getDisplay() {
         Properties prop = null;
         try {
             prop = Sentences.load();
-            Display.write(prop.getProperty("Start") + getNameMod() + "!\n"
+            Display.write(prop.getProperty("Start") + " " + getNameMod() + "!\n"
                     + prop.getProperty("StartOne") + "\n"
-                    + prop.getProperty("StartTwo") + " " + totalTurn2 + prop.getProperty("StartThree") + "\n"
-                    + prop.getProperty("StartTen")
+                    + prop.getProperty("StartTwo") + " " + totalTurn2 + " " + prop.getProperty("StartThree") + "\n"
+                    + prop.getProperty("StartTen") + "\n"
                     + prop.getProperty("StartFive"));
 
-            return getTurn();
+            getTurn();
         } catch (IOException e) {
             logger.debug(e);
         }
-        return null;
     }
 
     @Override
-    public String getTurn() {
+    public void getTurn() {
         IA ia = new IA();
         Properties prop = null;
 
@@ -79,14 +78,13 @@ public class Versus extends Mod {
                         Display.write(prop.getProperty("Equals"));
 
                     if (total.equals(win))
-                        return end(false);
+                        end(false);
                     total = memoryTotal;
                 }
             }
         } catch (IOException e) {
             logger.debug(e);
         }
-        return null;
     }
 
     @Override

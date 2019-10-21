@@ -21,7 +21,7 @@ public class Challenger extends Mod  {
     }
 
     @Override
-    public String getDisplay(){
+    public void getDisplay(){
         Properties prop = null;
         try {
             prop = Sentences.load();
@@ -31,15 +31,14 @@ public class Challenger extends Mod  {
                     + prop.getProperty("StartFour")
                     + prop.getProperty("StartFive"));
 
-            return getTurn();
+            getTurn();
         } catch (IOException e) {
             logger.debug(e);
         }
-        return null;
     }
 
     @Override
-    public String getTurn() {
+    public void getTurn() {
         IA ia = new IA();
         Properties prop = null;
 
@@ -61,22 +60,22 @@ public class Challenger extends Mod  {
                     for (int i = 0; i < secret; i++)
                         nb += "" + number.get(i);
                     Display.write(prop.getProperty("SecretOne") + nb);
-                    return end(false);
+                   end(false);
                 }
                 else {
                     chiffre = Captures.readInt(minP, maxP);
                     ia.seperat(chiffre);
                 }
 
-                if (total.equals(win))
-                    return end(true);
-                else
+                if (total.equals(win)) {
+                    Display.write( prop.getProperty("Combination") + chiffre);
+                    end(true);
+                } else
                     Display.write(prop.getProperty("Proposition") + chiffre + prop.getProperty("Response") + total);
             }
         } catch (IOException e) {
             logger.debug(e);
         }
-        return null;
     }
 
     @Override
