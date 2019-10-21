@@ -2,6 +2,7 @@ package com.escapegame.game;
 
 import com.escapegame.configuration.Sentences;
 import com.escapegame.tools.Captures;
+import com.escapegame.tools.Display;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +23,7 @@ public abstract class Mod {
         Properties prop = null;
         try {
             prop = Sentences.load();
-            System.out.println(prop.getProperty("Menu", "vide"));
+            Display.write(prop.getProperty("Menu"));
             selected = Captures.readInt(1, 3);
             started(selected);
         } catch (IOException e) {
@@ -51,8 +52,9 @@ public abstract class Mod {
      * The switch that allows the action chosen by the player
      *
      * @param select select the choice made by the player at the end of the game
+     * @return
      */
-    public static void choice(int select) {
+    public static String choice(int select) {
         switch (select) {
             case 1:
                 started(selected);
@@ -64,51 +66,59 @@ public abstract class Mod {
                 numberTurn = totalTurn;
                 break;
         }
+        return null;
     }
 
     /**
      * Display of start of game sentences
+     * @return
      */
-    public abstract void getDisplay();
+    public abstract String getDisplay();
 
     /**
      * A for loop that determines the turns of play
      * The game ends if nbTour and equal to totalTour
      * If the player does not find the combination, endGame is called false
      * If the player found before the nbTour rounds call endGame in true
+     * @return
      */
-    public abstract void getTurn();
+    public abstract String getTurn();
 
 
     /**
      * Determines whether the player won or lost at the end of the game
      *
      * @param end true if the player won, false if the player lost
+     * @return
      */
-    public void end(boolean end){
+    public String end(boolean end){
         Properties prop = null;
         try {
             prop = Sentences.load();
-            System.out.println(prop.getProperty("Menu"));
+            Display.write(prop.getProperty("Menu"));
             selected = Captures.readInt(1, 3);
             started(selected);
 
             if (end)
-                System.out.println(prop.getProperty("Win"));
+                Display.write(prop.getProperty("Win"));
             else
-                System.out.println(prop.getProperty("Lose"));
-            System.out.println("");
-            System.out.println(prop.getProperty("End"));
-            System.out.println("");
-            System.out.println(prop.getProperty("EndOne") + getNameMod() + " \n"
+                Display.write(prop.getProperty("Lose"));
+
+            Display.write("\n"
+                    + prop.getProperty("End")
+                    + "\n"
+                    + prop.getProperty("EndOne")
+                    + getNameMod()
+                    + " \n"
                     + prop.getProperty("EndTwo"));
 
             int select = Captures.readInt(1, 4);
 
-            Mod.choice(select);
+            return choice(select);
         } catch (IOException e) {
             logger.debug(e);
         }
+        return null;
     }
 
     public abstract String getNameMod();

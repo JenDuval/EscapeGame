@@ -17,14 +17,16 @@ public class IA {
     /**
      * The computer randomly initialize a secret digits secret code
      * in mode challenger
+     * @return
      */
-    public void initialize() {
+    public ArrayList<Integer> initialize() {
         Random r = new Random();
         for (int i = 0; i < secret; i++) {
             max.add(maximum);
             min.add(minimum);
             number.add(min.get(i) + r.nextInt(max.get(i) - min.get(i)));
         }
+        return number;
     }
 
     /**
@@ -32,8 +34,9 @@ public class IA {
      * in mode challenger
      *
      * @param number the number making up secret digits of the player
+     * @return
      */
-    public void seperat(int number) {
+    public String seperat(int number) {
         String line = Integer.toString(number);
         String[] splitArray = null;
 
@@ -45,7 +48,7 @@ public class IA {
             num.add(nb);
         }
 
-        this.balance(num);
+        return this.balance(num);
     }
 
     /**
@@ -53,8 +56,9 @@ public class IA {
      * in mode challenger
      *
      * @param num the ArrayList number entered by the player
+     * @return
      */
-    public void balance(ArrayList<Integer> num) {
+    public String balance(ArrayList<Integer> num) {
         total = "";
         for (int i = 0; i < secret; i++) {
             if (number.get(i) == num.get(i))
@@ -64,14 +68,16 @@ public class IA {
             else if (number.get(i) > num.get(i))
                 total += plus;
         }
+        return total;
     }
 
     /**
      * Randomly give numbers to find the combination of the player's secret code
      * The first rand to start the game
      * in mode defender
+     * @return
      */
-    public void first() {
+    public String first() {
         Random r = new Random();
 
         iaNumber = "";
@@ -81,14 +87,16 @@ public class IA {
             defNumber.add(min.get(i) + r.nextInt(max.get(i) - min.get(i)));
             iaNumber += "" + defNumber.get(i);
         }
+        return iaNumber;
     }
 
     /**
      * The computer top combination according to the response of the player
      * Change the min, max according to each digit in reference to the answer provided by the player
      * in mode defender
+     * @return
      */
-    public void play() {
+    public String play() {
         Random r = new Random();
 
         String line = total;
@@ -116,19 +124,22 @@ public class IA {
             }
             iaNumber += "" + defNumber.get(i);
         }
+        return iaNumber;
     }
 
     /**
      * Used for error handling
      * in mode defender
+     * @return
      */
-    public void beug() {
+    public String beug() {
         try {
-            this.play();
+            return this.play();
         } catch (Exception e) {
-            System.out.println("Un chiffre est négatif ou ne correspond plus au max de " + maximum + ", répondez correctement :");
+            logger.debug("Un chiffre est négatif ou ne correspond plus au max de " + maximum + ", répondez correctement :");
             Captures.readString();
         }
 
+        return null;
     }
 }

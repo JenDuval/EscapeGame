@@ -8,7 +8,11 @@ import static com.escapegame.configuration.Memory.lang;
 
 public abstract class Sentences {
 
-
+    /**
+     * Used to exploit the .properties file that implements sentences
+     * * @return returns the phrases ask
+     * @throws IOException
+     */
     public static Properties load() throws IOException{
         Properties properties = new Properties();
         String filename = "french.properties";

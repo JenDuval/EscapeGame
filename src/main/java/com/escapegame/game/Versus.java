@@ -2,6 +2,7 @@ package com.escapegame.game;
 
 import com.escapegame.configuration.Sentences;
 import com.escapegame.tools.Captures;
+import com.escapegame.tools.Display;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,66 +24,69 @@ public class Versus extends Mod {
     }
 
     @Override
-    public void getDisplay() {
+    public String getDisplay() {
         Properties prop = null;
         try {
             prop = Sentences.load();
-            System.out.println(prop.getProperty("Start") + getNameMod() + "!\n"
+            Display.write(prop.getProperty("Start") + getNameMod() + "!\n"
                     + prop.getProperty("StartOne") + "\n"
                     + prop.getProperty("StartTwo") + " " + totalTurn2 + prop.getProperty("StartThree") + "\n"
                     + prop.getProperty("StartTen")
                     + prop.getProperty("StartFive"));
 
-            getTurn();
+            return getTurn();
         } catch (IOException e) {
             logger.debug(e);
         }
+        return null;
     }
 
     @Override
-    public void getTurn() {
+    public String getTurn() {
         IA ia = new IA();
         Properties prop = null;
 
         try {
             prop = Sentences.load();
             ia.initialize();
-            System.out.println(prop.getProperty("SecretTwo"));
+            Display.write(prop.getProperty("SecretTwo"));
             numberJ = Captures.readInt(minP,maxP);
-            System.out.println(prop.getProperty("SecretFour") + code);
+            Display.write(prop.getProperty("SecretFour") + code);
             for (numberTurn = 1; numberTurn <= totalTurn2; numberTurn++) {
-                System.out.println("=== " + prop.getProperty("Turn") + " N°" + numberTurn + " ===");
+                Display.write("=== " + prop.getProperty("Turn") + " N°" + numberTurn + " ===");
                 if (numberTurn % 2 == 1) {
                     total = "";
                     chiffre  = Captures.readInt(minP, maxP);
                     ia.seperat(chiffre);
-                    System.out.println(prop.getProperty("Proposition") + chiffre + prop.getProperty("Response") + total);
+                    Display.write(prop.getProperty("Proposition") + chiffre + prop.getProperty("Response") + total);
 
                     if (numberTurn == 10)
-                        System.out.println(prop.getProperty("Equals"));
+                        Display.write(prop.getProperty("Equals"));
                     else if (total.equals(win))
                         end(true);
                 } else {
                     if (numberTurn == 2) {
                         ia.first();
-                        System.out.println(prop.getProperty("PropositionOne") + iaNumber);
+                        Display.write(prop.getProperty("PropositionOne") + iaNumber);
                         Captures.readString();
                     } else {
                         ia.beug();
-                        System.out.println(prop.getProperty("SecretThree") + numberJ + "\n" + prop.getProperty("PropositionOne") + iaNumber );
+                        Display.write(prop.getProperty("SecretThree") + numberJ + "\n" + prop.getProperty("PropositionOne") + iaNumber );
                         Captures.readString();
                     }
 
                     if (numberTurn == 10)
-                        System.out.println(prop.getProperty("Equals"));
-                    else if (total.equals(win))
-                        end(false);
+                        Display.write(prop.getProperty("Equals"));
+
+                    if (total.equals(win))
+                        return end(false);
                     total = memoryTotal;
                 }
             }
         } catch (IOException e) {
             logger.debug(e);
         }
+        return null;
     }
 
     @Override
