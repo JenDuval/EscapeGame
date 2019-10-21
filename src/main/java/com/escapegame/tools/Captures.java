@@ -1,8 +1,11 @@
 package com.escapegame.tools;
 
+import com.escapegame.configuration.Sentences;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Scanner;
 
 import static com.escapegame.game.Versus.memoryTotal;
@@ -20,7 +23,9 @@ public class Captures {
      * @param max Maximum value
      * @return retourne le reste
      */
-    public static int readInt(int min, int max) {
+    public static int readInt(int min, int max) throws IOException {
+        Properties prop = null;
+        prop = Sentences.load();
         //1) Saisie au clavier
         String line = sc.nextLine();
 
@@ -31,13 +36,13 @@ public class Captures {
         try {
             res = Integer.parseInt(line);
         } catch (Exception e) {
-            logger.debug("Cette valeur n'est pas autorisée");
+            logger.debug(prop.getProperty("Error"));
             return readInt(min, max);
         }
 
         //2.2) Vérif n°2 : Si l'entier entré n'est pas entre min et max : on le signale à l'utilisateur et on recommence
         if (res < min || res > max) {
-            logger.debug("Cette valeur n'est pas autorisée");
+            logger.debug(prop.getProperty("Error"));
             return readInt(min, max);
         }
 
@@ -51,7 +56,9 @@ public class Captures {
      *
      * @return total
      */
-    public static void readString() {
+    public static void readString() throws IOException {
+        Properties prop = null;
+        prop = Sentences.load();
         sc = new Scanner(System.in);
 
         //1) Saisie au clavier
@@ -75,13 +82,13 @@ public class Captures {
                 else if (splitArray[i].equals("="))
                     total += egale;
                 else {
-                    logger.debug("Cette valeur n'est pas autorisée");
+                    logger.debug(prop.getProperty("Error"));
                     readString();
                 }
                 memoryTotal = total;
             }
         } else {
-            logger.debug("Vous devez entré 4 charactères." + splitArray.length);
+            logger.debug(prop.getProperty("ErrorOne") + splitArray.length);
             for (int i = 0; i < splitArray.length; i++) {
                 logger.debug(splitArray[i]);
             }

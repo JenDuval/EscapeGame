@@ -1,10 +1,13 @@
 package com.escapegame.game;
 
+import com.escapegame.configuration.Sentences;
 import com.escapegame.tools.Captures;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Random;
 
 import static com.escapegame.configuration.Memory.*;
@@ -97,6 +100,7 @@ public class IA {
      * @return
      */
     public String play() {
+        Properties prop = null;
         Random r = new Random();
 
         String line = total;
@@ -115,7 +119,19 @@ public class IA {
                     max.set(i, defNumber.get(i) - 1);
 
                 if (test <= 0) {
-                    logger.debug("La tricherie ne vous fera pas gagné : Le signe entré en " + i++ + "éme possition donne " + test + " Les valeurs ne peuvent être ni nul, ni négatif");
+                    try {
+                        prop = Sentences.load();
+                    } catch (IOException e) {
+                        logger.debug(e);
+                    }
+                    logger.debug(prop.getProperty("Cheated")
+                            + " "
+                            + i++
+                            + prop.getProperty("CheatedOne")
+                            + " "
+                            + test
+                            + prop.getProperty("CheatedTwo")
+                            + " ");
                     max.set(i, maximum);
                     min.set(i, minimum);
                 }
@@ -133,11 +149,17 @@ public class IA {
      * @return
      */
     public String beug() {
+        Properties prop = null;
         try {
             return this.play();
         } catch (Exception e) {
-            logger.debug("Un chiffre est négatif ou ne correspond plus au max de " + maximum + ", répondez correctement :");
-            Captures.readString();
+            try {
+                prop = Sentences.load();
+                logger.debug(prop.getProperty("ErrorTwo") + " " + maximum + prop.getProperty("ErrorThree"));
+                Captures.readString();
+            } catch (IOException ex) {
+                logger.debug(ex);
+            }
         }
 
         return null;
