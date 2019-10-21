@@ -15,10 +15,10 @@ public abstract class Sentences {
 
         switch (lang) {
             case "fr":
-                filename = "GameplayStudio/src/main/ressources/french.properties";
+                filename = "src/main/ressources/french.properties";
                 break;
             case "en":
-                filename = "GameplayStudio/src/main/ressources/english.properties";
+                filename = "src/main/ressources/english.properties";
                 break;
         }
         FileInputStream input = new FileInputStream(filename);

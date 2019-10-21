@@ -37,7 +37,7 @@ public abstract class Settings {
      */
     public static void fileTXT() {
         try {
-            InputStream flux = new FileInputStream("GameplayStudio/src/main/java/com/escapegame/files/Configuration.txt");
+            InputStream flux = new FileInputStream("src/main/java/com/escapegame/files/Configuration.txt");
             InputStreamReader lecture = new InputStreamReader(flux);
             BufferedReader buff = new BufferedReader(lecture);
 
@@ -111,7 +111,7 @@ public abstract class Settings {
 
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            File fileXML = new File("GameplayStudio\\src\\main\\java\\com\\escapegame\\files\\Configuration.xml");
+            File fileXML = new File("src\\main\\java\\com\\escapegame\\files\\Configuration.xml");
             Document xml = builder.parse(fileXML);
             Element root = xml.getDocumentElement();
             XPathFactory xpf = XPathFactory.newInstance();
